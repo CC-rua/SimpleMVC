@@ -16,6 +16,7 @@
         <lombok.version>1.18.26</lombok.version>
         <spring-boot.version>3.0.5</spring-boot.version>
         <bytebuddy.version>1.14.2</bytebuddy.version>
+        <aspectj.version>1.9.19</aspectj.version>
     </properties>
     <dependencies>
         <!-- SLF4J -->
@@ -36,6 +37,12 @@
             <groupId>net.bytebuddy</groupId>
             <artifactId>byte-buddy</artifactId>
             <version>${bytebuddy.version}</version>
+        </dependency>
+        <!-- aspectj -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
