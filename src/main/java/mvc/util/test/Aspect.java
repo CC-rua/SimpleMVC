@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  */
 @Slf4j
 @SimpleComponent
-@SimpleAspect(pointcut = "execution(* mvc.util.test..*.sayHello(..))")
+@SimpleAspect(pointcut = "execution(* mvc.util.test..*.sayHello(..))", order = 1)
 public class Aspect implements SimpleAroundAdvice {
     @Override
     public void after(Object beProxyObj, Method method, Object[] args) {

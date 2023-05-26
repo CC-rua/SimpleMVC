@@ -26,44 +26,70 @@ public class SimpleAop {
      * 对所有bean执行aop()
      */
     public void doAop() {
-        beanContainer.getAllBean().stream()
-                .filter(SimpleAdviceBase.class::isInstance)
+        //获取所有代理节点对象
+        List<AdviceChainNode> adviceChainNodes = beanContainer.getBeanByAnnotation(SimpleAspect.class)
+                .stream()
+                .map(this::getAdviceChainNode)
+                .toList();
+        //增强所有需要被增强的对象
+        beanContainer.getAllKey().stream()
+                //被增强的对象不能又是一个切面
+                .filter(bean -> !bean.isAnnotationPresent(SimpleAspect.class))
                 .forEach(bean -> {
-                    SimpleAdviceBase adviceBase = (SimpleAdviceBase) bean;
-                    aop(adviceBase);
+                    List<AdviceChainNode> matchBeanNode = getMatchBeanNode(adviceChainNodes, bean);
+                    if (matchBeanNode.isEmpty()) {
+                        return;
+                    }
+                    aop(matchBeanNode, bean);
                 });
+    }
+
+
+    /**
+     * 获取所有匹配的beanNode节点
+     *
+     * @param adviceChainNodes 全部beanNode节点
+     * @param bean             过滤条件
+     * @return List<AdviceChainNode>
+     */
+    private List<AdviceChainNode> getMatchBeanNode(List<AdviceChainNode> adviceChainNodes, Class<?> bean) {
+        return adviceChainNodes.stream().filter(node -> node.getProxyPointcut().matches(bean)).toList();
+    }
+
+    /**
+     * 通过beanClass 创建代理链节点对象
+     *
+     * @param beanClass beanClass
+     * @return AdviceChainNode
+     */
+    private AdviceChainNode getAdviceChainNode(Class<?> beanClass) {
+        SimpleAspect simpleAspect = beanClass.getAnnotation(SimpleAspect.class);
+        Object bean = beanContainer.getBean(beanClass);
+        if (bean instanceof SimpleAdviceBase advice) {
+            //创建切点解析
+            ProxyPointcut proxyPointcut = new ProxyPointcut();
+            proxyPointcut.setExpression(simpleAspect.pointcut());
+
+            return new AdviceChainNode(advice, proxyPointcut, simpleAspect.order());
+        }
+        return null;
     }
 
     /**
      * 根据切面定义对bean对象生产Aop代理
      *
-     * @param advice 切面对象
+     * @param matchBeanNode 代理节点列表
+     * @param bean          被代理对象
      */
-    public void aop(SimpleAdviceBase advice) {
-        Class<?> oClass = advice.getClass();
-        if (oClass.isAnnotationPresent(SimpleAspect.class)) {
-            SimpleAspect annotation = oClass.getAnnotation(SimpleAspect.class);
-            //获取切点匹配器
-            ProxyPointcut proxyPointcut = new ProxyPointcut();
-            proxyPointcut.setExpression(annotation.pointcut());
-            //创建通知处理对象
-            ProxyAdvisor advisor = new ProxyAdvisor(advice, proxyPointcut);
-            beanContainer.getAllKey().stream()
-                    //被增强的对象不能又是一个切面
-                    .filter(bean -> !bean.isAnnotationPresent(SimpleAspect.class))
-                    .filter(proxyPointcut::matches)
-                    .forEach(bean -> {
-                        //创建代理对象
-                        Object proxyBean = null;
-                        try {
-                            proxyBean = ProxyCreator.createProxy(bean, advisor);
-                        } catch (NoSuchMethodException | InvocationTargetException
-                                | InstantiationException | IllegalAccessException e) {
-                            e.printStackTrace();
-                        }
-                        //注册到bean容器
-                        beanContainer.addBean(bean, proxyBean);
-                    });
+    private void aop(List<AdviceChainNode> matchBeanNode, Class<?> bean) {
+        ProxyAdvisor advisor = new ProxyAdvisor();
+        matchBeanNode.forEach(advisor::addAdviceChainNode);
+        try {
+            Object proxy = ProxyCreator.createProxy(bean, advisor);
+            beanContainer.addBean(bean, proxy);
+        } catch (NoSuchMethodException | InvocationTargetException
+                 | InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 }
