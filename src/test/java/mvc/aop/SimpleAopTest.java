@@ -4,10 +4,9 @@ import mvc.aop.advice.SimpleAdviceBase;
 import mvc.container.SimpleBeanContainer;
 import mvc.ioc.SimpleIoc;
 import mvc.util.InstanceFactory;
-import mvc.util.test.TestClassA;
+import mvc.example.TestClassA;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
 import static org.mockito.Mockito.verify;
 
@@ -21,7 +20,7 @@ public class SimpleAopTest {
         beanContainer = InstanceFactory.getInstance(SimpleBeanContainer.class);
         SimpleIoc simpleIocUnderTest = new SimpleIoc();
         beanContainer.loadBean("mvc.util.test");
-        simpleIocUnderTest.doIco();
+        simpleIocUnderTest.doIoc();
         simpleAopUnderTest = new SimpleAop();
     }
 

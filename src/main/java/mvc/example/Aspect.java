@@ -1,4 +1,4 @@
-package mvc.util.test;
+package mvc.example;
 
 import lombok.extern.slf4j.Slf4j;
 import mvc.aop.advice.SimpleAroundAdvice;

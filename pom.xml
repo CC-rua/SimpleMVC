@@ -17,6 +17,9 @@
         <spring-boot.version>3.0.5</spring-boot.version>
         <bytebuddy.version>1.14.2</bytebuddy.version>
         <aspectj.version>1.9.19</aspectj.version>
+        <tomcat.version>8.5.31</tomcat.version>
+        <jstl.version>1.2</jstl.version>
+        <fastjson.version>1.2.47</fastjson.version>
     </properties>
     <dependencies>
         <!-- SLF4J -->
@@ -63,6 +66,7 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

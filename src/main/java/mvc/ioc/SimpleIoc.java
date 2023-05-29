@@ -1,7 +1,7 @@
 package mvc.ioc;
 
 import mvc.container.SimpleBeanContainer;
-import mvc.ioc.annotation.IocException;
+import mvc.util.customException.IocException;
 import mvc.ioc.annotation.SimpleAutowired;
 import mvc.util.ClassUtil;
 import mvc.util.InstanceFactory;
@@ -29,7 +29,7 @@ public class SimpleIoc {
     /**
      * 对所有bean执行ioc()
      */
-    public void doIco() {
+    public void doIoc() {
         beanContainer.getAllBean().forEach(this::ioc);
     }
 

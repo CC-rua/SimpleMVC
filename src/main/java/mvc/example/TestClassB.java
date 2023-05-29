@@ -1,4 +1,4 @@
-package mvc.util.test;
+package mvc.example;
 
 import mvc.container.annotation.SimpleComponent;
 import mvc.ioc.annotation.SimpleAutowired;

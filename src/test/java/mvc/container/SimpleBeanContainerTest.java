@@ -1,7 +1,7 @@
 package mvc.container;
 
 import mvc.util.InstanceFactory;
-import mvc.util.test.TestClassA;
+import mvc.example.TestClassA;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
