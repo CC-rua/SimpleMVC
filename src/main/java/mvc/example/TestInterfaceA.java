@@ -1,4 +1,4 @@
-package mvc.util.test;
+package mvc.example;
 
 /**
  * TestClass
@@ -8,4 +8,5 @@ package mvc.util.test;
  * @since 2023/5/22 17:23
  */
 public interface TestInterfaceA {
+    void shark();
 }

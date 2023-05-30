@@ -10,5 +10,5 @@ import java.lang.reflect.Method;
  * @since 2023/5/23 14:26
  */
 public interface SimpleThrowAdvice extends SimpleAdviceBase {
-    void afterThrow(Class<?> targetClass, Method method, Object[] args);
+    void afterThrow(Object beProxyObj, Method method, Object[] args);
 }

@@ -33,9 +33,9 @@ public class SimpleBeanContainer {
         beanContainer.remove(cla);
     }
 
-    @SuppressWarnings("unchecked")
     public <T> T getBean(Class<T> cla) {
-        return (T) beanContainer.get(cla);
+        Object o = beanContainer.get(cla);
+        return cla.cast(o);
     }
 
     public List<Object> getAllBean() {

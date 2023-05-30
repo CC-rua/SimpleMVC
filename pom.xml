@@ -15,7 +15,11 @@
         <slf4j-api.version>2.0.5</slf4j-api.version>
         <lombok.version>1.18.26</lombok.version>
         <spring-boot.version>3.0.5</spring-boot.version>
-        <cglib.version>3.3.0</cglib.version>
+        <bytebuddy.version>1.14.2</bytebuddy.version>
+        <aspectj.version>1.9.19</aspectj.version>
+        <tomcat.version>8.5.31</tomcat.version>
+        <jstl.version>1.2</jstl.version>
+        <fastjson.version>1.2.47</fastjson.version>
     </properties>
     <dependencies>
         <!-- SLF4J -->
@@ -31,12 +35,38 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- cglib -->
+        <!-- byte-buddy -->
         <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>${cglib.version}</version>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${bytebuddy.version}</version>
         </dependency>
+        <!-- aspectj -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <!-- tomcat embed -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <version>${tomcat.version}</version>
+        </dependency>
+        <!-- JSTL -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- FastJson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

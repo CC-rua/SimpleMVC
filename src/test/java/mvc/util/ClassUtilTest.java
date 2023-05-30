@@ -1,7 +1,7 @@
 package mvc.util;
 
 
-import mvc.util.test.TestClassA;
+import mvc.example.TestClassA;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -12,5 +12,16 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SimpleAspect {
-    Class<? extends Annotation> target();
+    /**
+    * @Description 切点匹配字符串
+    * @Author zhujiaqi
+    * @Date 2023/5/25 14:51
+    **/
+    String pointcut();
+
+    /**
+     * 切面方法执行的顺序
+     * @return
+     */
+    int order();
 }
