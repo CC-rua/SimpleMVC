@@ -1,4 +1,4 @@
-package mvc.util.test;
+package mvc.example;
 
 /**
  * TestClass
