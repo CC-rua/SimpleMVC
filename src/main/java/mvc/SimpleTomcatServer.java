@@ -1,7 +1,8 @@
 package mvc;
 
 import lombok.extern.slf4j.Slf4j;
-import mvc.sevlet.DispatcherSevlet;
+import mvc.sevlet.DispatcherServlet;
+import mvc.util.customException.FileException;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -44,7 +45,7 @@ public class SimpleTomcatServer implements Server {
             // 添加 jspServlet，defaultServlet 和自己实现的 dispatcherServlet
             tomcat.addServlet("", "jspServlet", new JspServlet()).setLoadOnStartup(3);
             tomcat.addServlet("", "defaultServlet", new DefaultServlet()).setLoadOnStartup(1);
-            tomcat.addServlet("", "dispatcherServlet", new DispatcherSevlet()).setLoadOnStartup(0);
+            tomcat.addServlet("", "dispatcherServlet", new DispatcherServlet()).setLoadOnStartup(0);
             ctx.addServletMappingDecoded("/templates/" + "*", "jspServlet");
             ctx.addServletMappingDecoded("/static/" + "*", "defaultServlet");
             ctx.addServletMappingDecoded("/*", "dispatcherServlet");
@@ -82,7 +83,7 @@ public class SimpleTomcatServer implements Server {
             log.info("Tomcat:application resolved root folder: [{}]", root.getAbsolutePath());
             return root;
         } catch (URISyntaxException ex) {
-            throw new RuntimeException(ex);
+            throw new FileException("URI exception");
         }
     }
 }

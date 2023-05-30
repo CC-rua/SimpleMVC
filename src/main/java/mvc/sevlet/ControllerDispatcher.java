@@ -12,19 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * DespatcherSevlet
+ * DispatcherServlet
  *
  * @author cc
  * @description
  * @since 2023/5/26 16:14
  */
-public class ControllerDespatcher {
+public class ControllerDispatcher {
 
     private final Map<PathInfo, ControllerInfo> handlerDespatcherMap;
 
     private final SimpleBeanContainer beanContainer;
 
-    public ControllerDespatcher() {
+    public ControllerDispatcher() {
         this.handlerDespatcherMap = new HashMap<>();
         beanContainer = InstanceFactory.getInstance(SimpleBeanContainer.class);
     }

@@ -21,8 +21,9 @@ public class SimpleModelAndView {
         model = new ConcurrentHashMap<>();
     }
 
-    public void setView(String view) {
+    public SimpleModelAndView setView(String view) {
         this.view = view;
+        return this;
     }
 
     public String getView() {

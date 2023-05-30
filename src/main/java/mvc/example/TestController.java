@@ -3,7 +3,7 @@ package mvc.example;
 import com.alibaba.fastjson.JSONObject;
 import mvc.container.annotation.SimpleController;
 import mvc.sevlet.SimpleModelAndView;
-import mvc.sevlet.annotation.RequestBody;
+import mvc.sevlet.annotation.ResponseBody;
 import mvc.sevlet.annotation.RequestMapping;
 import mvc.sevlet.annotation.RequestParam;
 
@@ -18,7 +18,7 @@ import mvc.sevlet.annotation.RequestParam;
 @RequestMapping(value = "/test")
 public class TestController {
 
-    @RequestBody
+    @ResponseBody
     @RequestMapping(value = "/retStr")
     public String retStr() {
         return "hello world";
@@ -32,7 +32,7 @@ public class TestController {
         return simpleModelAndView;
     }
 
-    @RequestBody
+    @ResponseBody
     @RequestMapping(value = "/say")
     public String say(@RequestParam String str) {
         JSONObject jsonObject = new JSONObject();

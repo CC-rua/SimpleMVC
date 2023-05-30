@@ -4,7 +4,7 @@ import lombok.Getter;
 import mvc.aop.SimpleAop;
 import mvc.container.SimpleBeanContainer;
 import mvc.ioc.SimpleIoc;
-import mvc.sevlet.ControllerDespatcher;
+import mvc.sevlet.ControllerDispatcher;
 import mvc.util.InstanceFactory;
 
 /**
@@ -62,8 +62,8 @@ public class SimpleMvc {
             aop.doAop();
             SimpleIoc ioc = InstanceFactory.getInstance(SimpleIoc.class);
             ioc.doIoc();
-            ControllerDespatcher controllerDespatcher = InstanceFactory.getInstance(ControllerDespatcher.class);
-            controllerDespatcher.doInit();
+            ControllerDispatcher controllerDispatcher = InstanceFactory.getInstance(ControllerDispatcher.class);
+            controllerDispatcher.doInit();
 
             SimpleMvc.server = new SimpleTomcatServer(configuration);
             server.startServer();

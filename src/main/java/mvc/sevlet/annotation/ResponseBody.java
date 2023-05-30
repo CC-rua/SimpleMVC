@@ -9,10 +9,10 @@ import java.lang.annotation.Target;
  * RequestBody
  *
  * @author cc
- * @description 请求体
+ * @description 响应体，表示相应方式是 JSON 格式
  * @since 2023/5/26 16:16
  */
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequestBody {
+public @interface ResponseBody {
 }
